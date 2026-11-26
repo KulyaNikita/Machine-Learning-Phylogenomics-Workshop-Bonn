@@ -1,0 +1,33 @@
+{
+  "model": "PhyloAI-Fisher-Q.insect",
+  "selector": "PhyloAI-Fisher-Q.insect.npz",
+  "architecture": "b1",
+  "length_transform": "log10",
+  "selected_patterns": 10000,
+  "validation_loss": 0.5756745338439941,
+  "validation_accuracy": 0.8283617496490479,
+  "epochs_completed": 21,
+  "substitution_model": "Q.insect",
+  "model_format": "TensorFlow SavedModel",
+  "length_aware": true,
+  "pattern_columns": 160000,
+  "training_order": "ACDEFGHIKLMNPQRSTVWY",
+  "selector_sha256": "743d8236a9885093964771df87138941b44ce576268bf485ac69a7820dca22f7",
+  "inputs": {
+    "selected_patterns": {
+      "shape": [
+        null,
+        10000
+      ],
+      "dtype": "float32"
+    },
+    "alignment_length": {
+      "shape": [
+        null,
+        1
+      ],
+      "dtype": "float32",
+      "preprocessing": "log10(alignment_length_in_sites)"
+    }
+  }
+}

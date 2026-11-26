@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw a vertebrate Newick tree rooted on the dataset's shark.
+"""Save a PDF cladogram of a vertebrate Newick tree rooted on the dataset's shark.
 
 Usage: python3 visualise_tree.py TREE [--output PREFIX] [--show]
 Requires Biopython and Matplotlib.
@@ -39,7 +39,7 @@ def taxon_style(name):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("tree", type=Path, help="Newick tree with the workshop taxon identifiers")
-    parser.add_argument("--output", type=Path, help="Output prefix (default: TREE_shark_rooted)")
+    parser.add_argument("--output", type=Path, help="PDF output prefix (default: TREE_shark_rooted)")
     parser.add_argument("--show", action="store_true", help="Also open an interactive Matplotlib window")
     args = parser.parse_args()
 
@@ -113,13 +113,9 @@ def main():
 
     prefix = args.output or args.tree.with_name(args.tree.stem + "_shark_rooted")
     prefix.parent.mkdir(parents=True, exist_ok=True)
-    for extension in ("png", "pdf"):
-        output = Path(str(prefix) + "." + extension)
-        fig.savefig(output, dpi=200, facecolor=fig.get_facecolor())
-        print(f"Saved {output}")
-    rooted_path = Path(str(prefix) + ".tre")
-    Phylo.write(tree, rooted_path, "newick")
-    print(f"Saved rooted tree {rooted_path} ({len(tips)} taxa; outgroup: {OUTGROUP})")
+    output = Path(str(prefix) + ".pdf")
+    fig.savefig(output, facecolor=fig.get_facecolor())
+    print(f"Saved {output}")
     if args.show:
         plt.show()
     plt.close(fig)
